@@ -244,7 +244,7 @@ func (s *ValueS) TestGetRedirectWithoutLocation(c *C) {
 	testServer.PrepareResponse(303, headers, `{"ok": true}`)
 	v := lpad.NewValue(nil, "", testServer.URL+"/myvalue", nil)
 	_, err := v.Get(nil)
-	c.Assert(err, ErrorMatches, "Server returned %d without Location")
+	c.Assert(err, ErrorMatches, fmt.Sprintf("Get %q: 303 response missing Location header", testServer.URL+"/myvalue"))
 }
 
 func (s *ValueS) TestPost(c *C) {
